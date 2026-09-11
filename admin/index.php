@@ -71,9 +71,9 @@
                 else if (!password_verify($senha, $dadosUsuario->senha)) {
                     echo "<script>alert('Dados inválidos');history.back();</script>";
                 }
-                else if ($dadosUsuario->ativo !=1) {
-                    echo "<script>alert('Usuário inativo.Acesso não permitido');history.back();</script>";
-                }
+                // else if ($dadosUsuario->ativo !=1) {
+                //     echo "<script>alert('Usuário inativo.Acesso não permitido');history.back();</script>";
+                // }
                 else {
                     //registrar a variavel na sessao
                     $_SESSION["imdb"] = array(
@@ -106,6 +106,22 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cadastrar/categoria">Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                        <a
+                     class="nav-link"
+                    href="cadastrar/banner.php"
+                >
+                 Cadastro de Banners
+                 </a>
+                                <li class="nav-item">
+                      <a
+                   class="nav-link"
+                  href="listar/banner.php"
+                  >
+                   Listar Banners
+                 </a>
+            </li>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cadastrar/filme">Filme</a>

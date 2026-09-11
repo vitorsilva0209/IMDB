@@ -1,5 +1,11 @@
 <?php
     include "config.php";
+
+    $sql = "SELECT * FROM banner ORDER BY id DESC";
+
+    $stmt = $pdo->prepare($sql);
+
+    $banners = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -42,6 +48,87 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categorias
                         </a>
+                                            <div id="carouselBanners" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+
+        <?php foreach ($banners as $index => $banner): ?>
+
+            <button
+                type="button"
+                data-bs-target="#carouselBanners"
+                data-bs-slide-to="<?= $index ?>"
+                <?= $index === 0 ? 'class="active" aria-current="true"' : '' ?>
+                aria-label="Banner <?= $index + 1 ?>"
+            ></button>
+
+        <?php endforeach; ?>
+
+    </div>
+
+
+    <div class="carousel-inner">
+
+        <?php foreach ($banners as $index => $banner): ?>
+
+            <div
+                class="carousel-item <?= $index === 0 ? 'active' : '' ?>"
+            >
+
+                <img
+                    src="arquivos/banners/<?= htmlspecialchars($banner["banner"]) ?>"
+                    class="d-block w-100"
+                    alt="<?= htmlspecialchars($banner["descricao"]) ?>"
+                >
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+
+    <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselBanners"
+        data-bs-slide="prev"
+    >
+
+        <span
+            class="carousel-control-prev-icon"
+            aria-hidden="true"
+        ></span>
+
+        <span class="visually-hidden">
+            Anterior
+        </span>
+
+    </button>
+
+
+    <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselBanners"
+        data-bs-slide="next"
+    >
+
+        <span
+            class="carousel-control-next-icon"
+            aria-hidden="true"
+        ></span>
+
+        <span class="visually-hidden">
+            Próximo
+        </span>
+
+    </button>
+
+</div>
+
+
+
                         <ul class="dropdown-menu">
                             <?php
                                 $sqlCategoria = "select * from categoria order by categoria";
@@ -89,5 +176,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </html>
